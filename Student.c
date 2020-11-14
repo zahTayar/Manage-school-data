@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "Student.h"
+//compare function 
 int compareById(void* oneS, void* twoS) {
 	Student* one = *(Student**)oneS;
 	Student* two = *(Student**)twoS;
@@ -32,6 +33,7 @@ void printStudent(Student* theStu) {
 	else deagree = "second";
 	printf("studentId: %d , deagree: %s , grade: %d\n", theStu->id, deagree, theStu->grade);
 }
+//compressed student to struct
 void compressedStudent(Student* theStud, StudentCompressed* tmp) {
 
 	memset(tmp, 0, sizeof(StudentCompressed));
@@ -41,6 +43,7 @@ void compressedStudent(Student* theStud, StudentCompressed* tmp) {
 	tmp->typeGrade = ((theStud->grade & 0x7F) << 1) | theStud->type;
 
 }
+//un compressed it 
 void unCompressedStudent(Student* theStud, StudentCompressed* tmp) {
 
 	theStud->type = tmp->typeGrade & 0x1;
@@ -49,6 +52,7 @@ void unCompressedStudent(Student* theStud, StudentCompressed* tmp) {
 	theStud->id = (theStud->id << 8) | tmp->compId[1];
 	theStud->id = (theStud->id << 8) | tmp->compId[0];
 }
+
 int createStudents(Student** Arr, int size,FILE* f, char* type) {
 	
 	if (!strcmp(type, "text")) {
