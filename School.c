@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "School.h"
-
+//find student with binary search
 void searchStudentInSchool(School* theSchool, int id)
 {
 	sortEachClassInSchool(theSchool, compareById);
@@ -24,12 +24,12 @@ void searchStudentInSchool(School* theSchool, int id)
 	 printf("student not found");
 }
 
-
+//sort using quick sort
 void sortEachClassInSchool(School* theSchool, int(*compare)(void*, void*)) {
 	for (int i = 0; i < (theSchool->classCount * theSchool->countInClass); i += 7)
 		qsort(theSchool->studentArr + i, 7, sizeof(Student*), compare);
 }
-
+//print school
 void showSchool(School* theSchool) {
 	for (int i = 0; i < theSchool->classCount; i++) {
 		printf("class number %d\n", (i + 1));
@@ -39,6 +39,7 @@ void showSchool(School* theSchool) {
 		}
 	}
  }
+//function that get how many classes and the size of class 
 int createCounts(School* theSchool, FILE* f, eFileType type) {
 	if (type == text) {
 		if (!fscanf(f, "%d %d", &theSchool->classCount, &theSchool->countInClass)) { return 0; }
@@ -49,7 +50,7 @@ int createCounts(School* theSchool, FILE* f, eFileType type) {
 	}
 	return 1;
 }
-
+//save to binary with binary struct
 void saveSchoolToBinaryFile(char* fileName,School* theSchool) {
 	FILE* f = fopen(fileName, "wb");
 	if (!f) { return 0; }
@@ -71,6 +72,7 @@ void saveSchoolToBinaryFile(char* fileName,School* theSchool) {
 
 
 }
+//create school from text/binary file
 int createSchoolFromFile(char* fileName, School* theSchool, eFileType type) {
 	FILE* f;
 	if (type == text)
