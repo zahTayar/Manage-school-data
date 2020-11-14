@@ -2,7 +2,7 @@
 
 #include "Student.h"
 
-typedef enum { text, binary } eFileType;
+typedef enum { text, binary } eFileType;    // to understand in witch form to work 
 
 
 typedef struct {
